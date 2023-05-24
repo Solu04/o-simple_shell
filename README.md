@@ -20,8 +20,11 @@ This project is a simple UNIX command line interpreter, also known as a shell. T
 To compile the shell, use the following command:
 ```
 gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+```
 To run the shell in interactive mode, execute the compiled binary:
+```
 ./hsh
+```
 
 The shell will display a prompt where you can enter commands. The prompt will be shown again after executing each command.
 
