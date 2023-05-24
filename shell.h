@@ -1,5 +1,5 @@
-#ifndef _HOLBERTON_
-#define _HOLBERTON_
+#ifndef _SHELL_H
+#define _SHELL_H
 
 #include <stdio.h>
 #include <unistd.h>
