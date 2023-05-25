@@ -1,6 +1,33 @@
 #include "shell.h"
 
 /**
+ * read_line - reads the input string.
+ *
+ * @i_eof: return value of getline function
+ * Return: input string
+ */
+char *read_line(int *i_eof)
+{
+	char *input = NULL;
+	size_t bufsize = 0;
+
+	*i_eof = getline(&input, &bufsize, stdin);
+
+	return (input);
+}
+
+/**
+ * get_sigint - Handle the crtl + c call in prompt
+ * @sig: Signal handler
+ */
+void get_sigint(int sig)
+{
+	(void)sig;
+	write(STDOUT_FILENO, "\n^-^ ", 5);
+}
+
+
+/**
  * bring_line - assigns the line var for get_line
  * @lineptr: Buffer that store the input str
  * @buffer: str that is been called to line
@@ -81,4 +108,58 @@ ssize_t get_line(char **lineptr, size_t *n, FILE *stream)
 	if (i != 0)
 		input = 0;
 	return (retval);
+}
+
+
+/**
+ * error_sep_op - finds syntax errors
+ *
+ * @input: input string
+ * @i: index
+ * @last: last char read
+ * Return: index of error. 0 when there are no
+ * errors
+ */
+int error_sep_op(char *input, int i, char last)
+{
+	int count;
+
+	count = 0;
+	if (*input == '\0')
+		return (0);
+
+	if (*input == ' ' || *input == '\t')
+		return (error_sep_op(input + 1, i + 1, last));
+
+	if (*input == ';')
+		if (last == '|' || last == '&' || last == ';')
+			return (i);
+
+	if (*input == '|')
+	{
+		if (last == ';' || last == '&')
+			return (i);
+
+		if (last == '|')
+		{
+			count = repeated_char(input, 0);
+			if (count == 0 || count > 1)
+				return (i);
+		}
+	}
+
+	if (*input == '&')
+	{
+		if (last == ';' || last == '|')
+			return (i);
+
+		if (last == '&')
+		{
+			count = repeated_char(input, 0);
+			if (count == 0 || count > 1)
+				return (i);
+		}
+	}
+
+	return (error_sep_op(input + 1, i + 1, *input));
 }
