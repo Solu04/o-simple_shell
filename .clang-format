@@ -1,0 +1,10 @@
+# Betty style guidelines:
+# indent with tabs
+# each indent level is four spaces
+# no trailing whitespace
+IndentWidth: 8
+TabWidth: 8
+UseTab: Always
+#AllowTrailingWhitespace: false
+KeepEmptyLinesAtTheStartOfBlocks: false
+BreakBeforeBraces: Allman
