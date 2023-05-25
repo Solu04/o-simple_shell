@@ -92,13 +92,11 @@ typedef struct builtin_s
 	int (*f)(data_shell *datash);
 } builtin_t;
 
-/* aux_lists.c */
+/* aux_lists_collection.c */
 sep_list *add_sep_node_end(sep_list **head, char sep);
 void free_sep_list(sep_list **head);
 line_list *add_line_node_end(line_list **head, char *line);
 void free_line_list(line_list **head);
-
-/* aux_lists2.c */
 r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
 void free_rvar_list(r_var **head);
 

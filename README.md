@@ -50,7 +50,7 @@ file1 file2 file3
 $
 ```
 ### Files Description
-
+- **aux_error1.c : handles cd command errors
 ## Authors
 - Ataboh Hamza
 - Youseff R.R
